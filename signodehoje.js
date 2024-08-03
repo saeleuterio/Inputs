@@ -17,18 +17,22 @@ const retorna_signo = (signos, data) => {
 
     let ano = data.getFullYear();
 
-    let data_inicio_signo =
-     new Date(ano + "-" + signos[0]["DataInicio"] + " 00:00:00");
-    let data_fim_signo =
-     new Date(ano + "-" + signos[0]["DataFim"] + " 23:59:59");
+    for ( const signo of signos ){
 
-    if ( data >= data_inicio_signo && data <= data_fim_signo ){
-        return signos[0]["Nome"];
+        let data_inicio_signo =
+         new Date(ano + "-" + signo["DataInicio"] + " 00:00:00");
+        let data_fim_signo =
+         new Date(ano + "-" + signo["DataFim"] + " 23:59:59");
+
+        if ( data >= data_inicio_signo && data <= data_fim_signo ){
+            return signo["Nome"];
+        }
+
     }
 
 }
 
-let data_app = new Date("2020-02-07 00:00:00");
+let data_app = new Date("2020-07-28 00:00:00");
 
 const nome_signo = retorna_signo(colecao_signos, data_app);
 
