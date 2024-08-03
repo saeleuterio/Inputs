@@ -46,7 +46,7 @@ const retorna_signo = (signos, data) => {
 
 }
 
-let data_app = new Date("2024-12-30 00:00:00");
+let data_app = new Date(); //Se coocar "2024-12-30 00:00:00" entre os parenteses muda para a data digitada senão é a data do sistema
 
 const nome_signo = retorna_signo(colecao_signos, data_app);
 
