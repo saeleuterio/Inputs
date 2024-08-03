@@ -13,11 +13,22 @@ let colecao_signos = [
     {"Nome": "Capricórnio", "DataInicio": "12-22","DataFim":"01-19"}
 ];
 
+const verifica_data_range =
+ (data, data_inicio, data_fim, tipo_comparacao) => {
+
+    if ( tipo_comparacao == "and" ){
+        return (data >= data_inicio && data <= data_fim);
+    } else if( tipo_comparacao == "or" ){
+        return (data >= data_inicio || data <= data_fim);
+    }
+
+}
+
 const retorna_signo = (signos, data) => {
 
     let ano = data.getFullYear();
 
-    for ( const signo of signos ){
+    for (const signo of signos ){
 
         let data_inicio_signo =
          new Date(ano + "-" + signo["DataInicio"] + " 00:00:00");
@@ -26,25 +37,16 @@ const retorna_signo = (signos, data) => {
 
         let tipo_comparacao = signo["DataInicio"] == "12-22" ? "or" : "and";
 
-        if ( tipo_comparacao == "and"){
-
-            if ( data >= data_inicio_signo && data <= data_fim_signo ){
-                return signo["Nome"];
-            }
-
-        } else if (tipo_comparacao == "or"){
-
-            if ( data >= data_inicio_signo || data <= data_fim_signo ){
-                return signo["Nome"];
-            }
-
+        if (verifica_data_range
+         (data, data_inicio_signo, data_fim_signo, tipo_comparacao)){
+            return signo["Nome"];
         }
 
     }
 
 }
 
-let data_app = new Date();
+let data_app = new Date("2024-12-30 00:00:00");
 
 const nome_signo = retorna_signo(colecao_signos, data_app);
 
